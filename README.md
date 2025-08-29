@@ -75,21 +75,11 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 
 ```
 e-commerce-data-analysis/
-├── dashboards/                           # Power BI dashboard files
-│   ├── sales_dashboard.pbix
-│   └── dashboard_image.png
-├── notebooks/                            # Python analysis notebooks
-│   └── analysis.ipynb
-├── raw_data/kaggle_data                  # Original CSV datasets
-│   └── sales_transaction.csv
-├── sql/                                  # Fact table and SQL views
-│   ├── fact_sales.sql
-│   ├── view_customer_segmentation.sql
-│   ├── view_kpi_summary.sql
-│   ├── view_monthly_revenue.sql
-│   ├── view_top_products.sql
-│   └── view_weekday_sale.sql
-├── .gitignore
+├── dashboards/             # Power BI files
+├── notebooks/              # Python analysis
+├── raw_data/kaggle_data    # CSV datasets
+├── sql/                    # SQL scripts
+├── gitignore
 └── requirements.txt
 ```
 
