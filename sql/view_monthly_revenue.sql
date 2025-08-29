@@ -1,3 +1,4 @@
+-- Monthly Revenue
 CREATE OR REPLACE VIEW view_monthly_revenue AS
 SELECT 
     date, 

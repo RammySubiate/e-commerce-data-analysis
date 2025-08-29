@@ -1,3 +1,4 @@
+-- Top 10 Products
 CREATE OR REPLACE VIEW view_top_10_products AS
 SELECT 
     product_name, 
