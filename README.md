@@ -1,10 +1,10 @@
 # Sales Analytics Dashboard Portfolio
 
 ## Project Overview
-This project demonstrates an end-to-end data analytics workflow using **Python, SQL, and Power BI**. The goal is to clean, transform, and analyze sales transaction data, and create a professional, interactive dashboard for business insights.
+This project demonstrates an end-to-end data analytics workflow using **Python, SQL, and Power BI**. The goal is to clean, transform, and analyze sales transaction data, and create a dashboard for business insights.
 
 - **Data Source:** Kaggle - Online Retail dataset (https://www.kaggle.com/datasets/gabrielramos87/an-online-shop-business) 
-- **Tools Used:** Python (`pandas`, `numpy`, 'matplotlib'), PostgreSQL / Azure SQL, Power BI
+- **Tools Used:** Python (`pandas`, `numpy`, `matplotlib`), PostgreSQL / Azure SQL, Power BI
 
 ---
 
@@ -28,15 +28,15 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 - Created a single **fact table** (`fact_sales`) with all transactions and engineered features.
 - Developed SQL views to pre-aggregate KPIs and metrics for Power BI:
   - `view_total_revenue` → Total Revenue
-  - `view_avg_product_per_transaction` → Avg products per transaction
+  - `view_avg_product_per_transaction` → Average Product Per Transaction
   - `view_total_order_value` → Average Order Value
   - `view_total_transaction` → Total Transactions
-  - `view_top_product` → Top-selling product by revenue
+  - `view_top_product` → Top-selling product By Revenue
   - `view_customer_vs_revenue_by_frequency` → % Revenue vs % Customers per frequency segment
   - `view_customer_vs_revenue_by_contribution` → % Revenue vs % Customers per contribution segment
   - `view_monthly_revenue` → Monthly Revenue
   - `view_top_10_products` → Top 10 Products by Revenue
-  - `view_weekday_sales` → Weekday Sales by Revenue
+  - `view_weekday_sales` → Weekday Sales
 
 **Notes on SQL design:**
 - Views are pre-aggregated per metric for efficient reporting.
