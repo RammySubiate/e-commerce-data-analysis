@@ -3,8 +3,23 @@
 ## Project Overview
 This project demonstrates an end-to-end data analytics workflow using **Python, SQL, and Power BI**. The goal is to clean, transform, and analyze sales transaction data, and create a dashboard for business insights.
 
-- **Data Source:** Kaggle - Online Retail dataset (https://www.kaggle.com/datasets/gabrielramos87/an-online-shop-business) 
+**Stakeholders questions based on data source (Kaggle)**
+
+1. How was the sales trend over the months?
+
+2. What are the most frequently purchased products?
+
+3. How many products does the customer purchase in each transaction?
+
+4. What are the most profitable segment customers?
+
+5. Based on your findings, what strategy could you recommend to the business to gain more profit?
+   
+
+- **Data Source:** Kaggle - Online Retail dataset (https://www.kaggle.com/datasets/gabrielramos87/an-online-shop-business)
+- Notebooks: [analysis.ipynb](notebooks/analysis.ipynb), [sql_validation.ipynb](notebooks/sql_validation.ipynb)
 - **Tools Used:** Python (`pandas`, `numpy`, `matplotlib`), PostgreSQL / Azure SQL, Power BI
+  
 
 ---
 
