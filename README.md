@@ -20,12 +20,23 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
   - `customer_frequency` (least → most frequent)
   - `customer_contribution` (least → most contributing)
 - Categorized products by price and volume using `qcut`.
+- Exported the cleaned DataFrame to Azure PostgreSQL.
 
 ---
 
 ## SQL Workflow
-- Exported the cleaned DataFrame to Azure PostgreSQL.
-- Created a single **fact table** (`fact_sales`) with all transactions and engineered features.
+
+**SQL Validation Checks**  
+  - Using SQL, the dataset was validated for key quality metrics including:
+    - Column names and data types
+    - Total row count
+    - Null values per column
+    - Duplicate rows (exact duplicates across all columns)
+    - A reusable Python function (`run_query`) was used to execute SQL queries and return results as DataFrames, making the workflow reproducible and clean.
+
+**Note:** 
+- While in production environments, SQL validation often occurs first, this workflow emphasizes reproducibility, clarity, and showcases proficiency across multiple tools — Python for EDA, SQL for validation, and Power BI for reporting.
+
 - Developed SQL views to pre-aggregate KPIs and metrics for Power BI:
   - `view_total_revenue` → Total Revenue
   - `view_avg_product_per_transaction` → Average Product Per Transaction
@@ -38,9 +49,7 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
   - `view_top_10_products` → Top 10 Products by Revenue
   - `view_weekday_sales` → Weekday Sales
 
-**Notes on SQL design:**
 - Views are pre-aggregated per metric for efficient reporting.
-- Window functions (`SUM() OVER()`) were used to calculate percentages for customer segments.
 - Views can be refreshed to reflect updated data in Power BI.
 
 ---
@@ -63,7 +72,7 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 ---
 
 ## Recommendations / Findings
-- Transactions concentrated in **UK (92%)**; peak revenue in **September**.
+- Transactions concentrated in **UK (~91%)**; peak revenue in **September**.
 - Top 25% frequent customers generate ~63% of revenue; top contributors generate ~78%.
 - Popular products may not be the most profitable — opportunity for bundling with higher-margin products.
 - Midweek sales slump (Wednesdays) — opportunity for flash promotions.
@@ -76,7 +85,7 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 ```
 e-commerce-data-analysis/
 ├── dashboards/             # Power BI files
-├── notebooks/              # Python analysis
+├── notebooks/              # Python analysis & SQL Validation check
 ├── raw_data/kaggle_data    # CSV datasets
 ├── sql/                    # SQL scripts
 ├── gitignore

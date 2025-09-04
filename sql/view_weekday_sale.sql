@@ -1,3 +1,4 @@
+
 -- Weekday Sales
 CREATE OR REPLACE VIEW view_weekday_sales AS
 SELECT
