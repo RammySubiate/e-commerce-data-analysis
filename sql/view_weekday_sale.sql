@@ -5,6 +5,12 @@ SELECT
     TO_CHAR(date, 'Day') AS weekday_name,
     ROUND(SUM(revenue)::numeric, 2) AS total_revenue,
     EXTRACT(ISODOW FROM date) AS weekday_order
-FROM fact_sales
+    FROM fact_transactions
+    INNER JOIN dim_date
+        USING(date_id)
+    INNER JOIN dim_product
+        USING(product_id)
+    INNER JOIN dim_customer
+        USING(customer_id)
 GROUP BY weekday_name, weekday_order
 ORDER BY weekday_order;

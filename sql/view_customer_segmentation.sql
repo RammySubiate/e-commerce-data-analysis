@@ -5,7 +5,13 @@ WITH total_per_segment AS (
         customer_frequency,
         ROUND(COUNT(DISTINCT customer_num)::numeric, 2) AS customer_per_segment,
         ROUND(SUM(revenue)::numeric, 2) AS revenue_per_segment
-    FROM fact_sales
+    FROM fact_transactions
+    INNER JOIN dim_date
+        USING(date_id)
+    INNER JOIN dim_product
+        USING(product_id)
+    INNER JOIN dim_customer
+        USING(customer_id)
     GROUP BY customer_frequency
 )
 SELECT 
@@ -15,6 +21,8 @@ SELECT
 FROM total_per_segment
 ORDER BY customer_frequency;
 
+
+
 -- %Customer vs %Revenue by Customer Contribution
 CREATE OR REPLACE VIEW view_customer_vs_revenue_by_contribution AS
 WITH total_per_segment AS (
@@ -22,7 +30,13 @@ WITH total_per_segment AS (
         customer_contribution,
         ROUND(COUNT(DISTINCT customer_num)::numeric, 2) AS customer_per_segment,
         ROUND(SUM(revenue)::numeric, 2) AS revenue_per_segment
-    FROM fact_sales
+    FROM fact_transactions
+    INNER JOIN dim_date
+        USING(date_id)
+    INNER JOIN dim_product
+        USING(product_id)
+    INNER JOIN dim_customer
+        USING(customer_id)
     GROUP BY customer_contribution
 )
 SELECT 
