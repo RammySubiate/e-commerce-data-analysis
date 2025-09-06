@@ -39,38 +39,41 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 
 ---
 
-## SQL Workflow
+## SQL Workflow / Data Modeling
 
-**SQL Validation Checks**  
-  - Using SQL, the dataset was validated for key quality metrics including:
-    - Column names and data types
-    - Total row count
-    - Null values per column
-    - Duplicate rows (exact duplicates across all columns)
-    - A reusable Python function (`run_query`) was used to execute SQL queries and return results as DataFrames, making the workflow reproducible and clean.
+### Dimensional Modeling
+The raw flat dataset was transformed into a **star schema** to enable efficient reporting and analysis.
 
-**Note:** 
-- While in production environments, SQL validation often occurs first, this workflow emphasizes reproducibility, clarity, and showcases proficiency across multiple tools — Python for EDA, SQL for validation, and Power BI for reporting.
+**Dimension Tables:**
+- `dim_product` → `product_id`, `product_num`, `product_name`, `price`
+- `dim_customer` → `customer_id`, `customer_num`, `country`, `customer_frequency`, `customer_contribution`
+- `dim_date` → `date_id`, `date`
 
-- Developed SQL views to pre-aggregate KPIs and metrics for Power BI:
-  - `view_total_revenue` → Total Revenue
-  - `view_avg_product_per_transaction` → Average Product Per Transaction
-  - `view_total_order_value` → Average Order Value
-  - `view_total_transaction` → Total Transactions
-  - `view_top_product` → Top-selling product By Revenue
-  - `view_customer_vs_revenue_by_frequency` → % Revenue vs % Customers per frequency segment
-  - `view_customer_vs_revenue_by_contribution` → % Revenue vs % Customers per contribution segment
-  - `view_monthly_revenue` → Monthly Revenue
-  - `view_top_10_products` → Top 10 Products by Revenue
-  - `view_weekday_sales` → Weekday Sales
+**Fact Table:**
+- `fact_transactions` → `transaction_id`, `transaction_num`, `date_id`, `product_id`, `customer_id`, `quantity`, `revenue`
 
-- Views are pre-aggregated per metric for efficient reporting.
-- Views can be refreshed to reflect updated data in Power BI.
+**Benefits of Dimensional Model:**
+- Ensures **consistent unique identifiers (surrogate keys)** across tables.  
+- Supports **interactive dashboards** in Power BI through relationships between fact and dimension tables.  
+- Improves **query performance** and avoids redundant computations.  
+
+### SQL Validation Checks
+- Validated data quality: duplicates, nulls, data types, row counts.  
+- Created **views for pre-aggregated metrics and KPIs**:
+  - `view_total_revenue`
+  - `view_avg_product_per_transaction`
+  - `view_total_order_value`
+  - `view_total_transaction`
+  - `view_top_product`
+  - `view_customer_vs_revenue_by_frequency`
+  - `view_customer_vs_revenue_by_contribution`
+  - `view_weekday_sales`
+- Pre-aggregation in views ensures **fast, interactive dashboards** in Power BI without compromising detail.
 
 ---
 
 ## Power BI Dashboard
-- Connected to SQL views and fact table.
+- Connected to SQL views, dim and fact table.
 - Created KPI cards and charts:
   - Total Revenue, Avg Product Per Transaction, Avg Order Value, Total Transactions, Top Product
   - Monthly Revenue Trend
@@ -80,7 +83,7 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
   - Segment % Revenue and % Customers by Customer Contribution
 - **Interactivity:**
   - KPI cards update automatically on SQL refresh.
-  - Charts are interactive (slicers and filters) when using the full fact table.
+  - Charts are interactive.
     
 ![Power BI Sales Dashboard Overview](dashboards/dashboard_image.png)
 
