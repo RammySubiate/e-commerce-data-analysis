@@ -3,6 +3,8 @@
 ## Project Overview
 This project demonstrates an end-to-end data analytics workflow using **Python, SQL, and Power BI**. The goal is to clean, transform, and analyze sales transaction data, and create a dashboard for business insights.
 
+A Python ETL script automates data cleaning, transformation, customer segmentation, revenue calculation, and loading into PostgreSQL for easier updates.
+
 **Stakeholders questions based on data source (Kaggle)**
 
 1. How was the sales trend over the months?
@@ -23,7 +25,8 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
 
 ---
 
-## Data Cleaning & Feature Engineering (Python)
+## Data Cleaning, Feature Engineering & ETL Automation (Python)
+
 - Loaded raw transaction data into a Pandas DataFrame.
 - Created cleaned columns and engineered features:
   - `revenue = price * quantity`
@@ -36,6 +39,14 @@ This project demonstrates an end-to-end data analytics workflow using **Python, 
   - `customer_contribution` (least → most contributing)
 - Categorized products by price and volume using `qcut`.
 - Exported the cleaned DataFrame to Azure PostgreSQL.
+
+### Python ETL Script
+A Python script was created to automate the ETL process:
+- Reads the raw CSV transaction data
+- Cleans and transforms the dataset
+- Removes duplicate or cancelled transactions
+- Creates calculated fields and customer segments
+- Inserts only new rows into the PostgreSQL `flat_sales` table
 
 ---
 
@@ -59,31 +70,29 @@ The raw flat dataset was transformed into a **star schema** to enable efficient 
 
 ### SQL Validation Checks
 - Validated data quality: duplicates, nulls, data types, row counts.  
-- Created **views for pre-aggregated metrics and KPIs**:
-  - `view_total_revenue`
-  - `view_avg_product_per_transaction`
-  - `view_total_order_value`
-  - `view_total_transaction`
-  - `view_top_product`
-  - `view_customer_vs_revenue_by_frequency`
-  - `view_customer_vs_revenue_by_contribution`
-  - `view_weekday_sales`
-- Pre-aggregation in views ensures **fast, interactive dashboards** in Power BI without compromising detail.
 
 ---
 
 ## Power BI Dashboard
-- Connected to SQL views, dim and fact table.
-- Created KPI cards and charts:
-  - Total Revenue, Avg Product Per Transaction, Avg Order Value, Total Transactions, Top Product
-  - Monthly Revenue Trend
-  - Weekday Sales
-  - Top 10 Products by Revenue
-  - Segment % Revenue and % Customers by Customer Frequency
-  - Segment % Revenue and % Customers by Customer Contribution
-- **Interactivity:**
-  - KPI cards update automatically on SQL refresh.
-  - Charts are interactive.
+
+- **Data Source:** Connected to SQL dim and fact tables.  
+- **KPIs and Charts Created:**  
+  - KPI Cards: Total Revenue, Total Transactions, Average Basket Size, Average Order Value  
+  - Monthly Revenue Trend  
+  - Weekday Sales  
+  - Top 10 Products by Popularity  
+  - Customer Segmentation:  
+    - % Revenue and % Customers by Customer Frequency (least → most frequent)  
+    - % Revenue and % Customers by Customer Contribution (low → high contributing customers)  
+- **Measures Implemented (DAX):**  
+  - Total Revenue: Sum of all sales amounts  
+  - Total Transactions: Count of distinct transactions  
+  - Average Basket Size: Total quantity sold ÷ Total number of transactions  
+  - Average Order Value: Total revenue ÷ Total transactions  
+  - % Customers and % Revenue: Relative contribution per customer segment, displayed as percentages in charts  
+- **Interactivity:**  
+  - KPIs update automatically on SQL data refresh  
+  - Charts are interactive, allowing filtering by date, product, or customer segment
     
 ![Power BI Sales Dashboard Overview](dashboards/dashboard_image.png)
 
@@ -101,13 +110,16 @@ The raw flat dataset was transformed into a **star schema** to enable efficient 
 ## Folder Structure
 
 ```
+
 e-commerce-data-analysis/
 ├── dashboards/             # Power BI files
-├── notebooks/              # Python analysis & SQL Validation check
-├── raw_data/kaggle_data    # CSV datasets
+├── notebooks/              # Python analysis & SQL validation notebooks
+├── raw_data/kaggle_data/   # CSV datasets
+├── scripts/                # Python ETL / automation scripts
 ├── sql/                    # SQL scripts
-├── gitignore
+├── .gitignore
 └── requirements.txt
+
 ```
 
 
